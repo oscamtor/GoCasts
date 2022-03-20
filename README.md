@@ -1,2 +1,3 @@
 # GoCasts
-Basado en StephenGrider / GoCasts y su curso en udemy
+
+Companion repo to a course on Udemy.com
