@@ -27,12 +27,14 @@ func newDeck() deck {
 
 	return cards
 }
-// d aqui es un receiver (va antes de nombre_funcion) => podre invocar receiver.print(). Equivale a un metodo privado de clase deck en C++
+
+// d aqui es un receiver (va antes de nombre_funcion) => podre invocar d.print(). Equivale a un metodo privado de clase deck en C++
 func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
 	}
 }
+
 // d aqui es un parametro (va despues del nombre_funcion).
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
@@ -58,10 +60,10 @@ func newDeckFromFile(filename string) deck {
 	s := strings.Split(string(bs), ",")
 	return deck(s)
 }
-// Randomize the order of cards inside it 
-func (d deck)  shuffle() {
-     // r (a random number generator) type is Rand is a source (<=> seed) of random numbers <=> It is an object that will generate random numbers for us
 
+// Randomize the order of cards inside it
+func (d deck) shuffle() {
+	// r (a random number generator) type is Rand is a source (<=> seed) of random numbers <=> It is an object that will generate random numbers for us
 
 	// Seeding with the same value results in the same random sequence each run.
 	// For different numbers, seed with a different value, such as
@@ -75,13 +77,13 @@ func (d deck)  shuffle() {
 	// Podríamos pero NO necesitamos cada card solo el indice
 	//for i, card := range d {
 	for i := range d {
-	    // Bad
+		// Bad
 		// ---
-	    // newPosition := rand.Intn(len(d) - 1)
-		// because the random will be the same even with a seed variable like the one  that time.Now().UnixNano() give us => the last 4 cards after shuffle will be the same in different ejecutions!! 
+		// newPosition := rand.Intn(len(d) - 1)
+		// because the random will be the same even with a seed variable like the one  that time.Now().UnixNano() give us => the last 4 cards after shuffle will be the same in different ejecutions!!
 		// Good
 		// ----
-	    // From doc:
+		// From doc:
 		// func (r *Rand) Intn(n int) int
 		// tell us that if we have a value of type Rand, that value can call the Int function passig it an int and get back an int as return
 		newPosition := r.Intn(len(d) - 1) // For each card (<=> each index) of the slice, we are going to generate a random number between 0 & the max len of the slice <=> len(d)-1

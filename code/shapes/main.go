@@ -21,14 +21,14 @@ func main() {
 	printArea(s)
 }
 
-func (s square) getArea() float64 {
+func (s square) getArea() float64 { // VERY custom logic => to interface
 	return s.sideLength * s.sideLength
 }
 
-func (t triangle) getArea() float64 {
+func (t triangle) getArea() float64 { // VERY custom logic  => to interface
 	return 0.5 * t.base * t.height
 }
 
-func printArea(s shape) {
+func printArea(s shape) { // VERY common logic => will delegate in interface
 	fmt.Println(s.getArea())
 }
